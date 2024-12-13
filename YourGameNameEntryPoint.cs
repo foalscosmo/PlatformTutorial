@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using com.appidea.MiniGamePlatform.CommunicationAPI;
-using Managers;
 using UnityEngine;
 
 public class YourGameNameEntryPoint : BaseMiniGameEntryPoint
