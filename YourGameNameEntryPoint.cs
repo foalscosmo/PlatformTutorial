@@ -5,16 +5,30 @@ using UnityEngine;
 
 public class YourGameNameEntryPoint : BaseMiniGameEntryPoint
 {
-    [SerializeField] private GameObject gamePrefab;
-    protected override Task LoadInternal()
-    {
-        var gameManager = Instantiate(gamePrefab);
-        gameManager.GetComponent<GameManager>().SetEntryPoint(this);
-        return Task.CompletedTask;
-    }
+   [SerializeField] private GameObject gamePrefab;
+        private IGameOverScreen gameOverScreen = default;
+        
+        protected override Task LoadInternal()
+        {
+            var gameManager = Instantiate(gamePrefab);
+            gameManager.GetComponent<APISystem>().SetEntryPoint(this);
+            
+            var canvasParent = gameManager.GetComponent<APISystem>();
 
-    protected override Task UnloadInternal()
-    {
-        return Task.CompletedTask;
-    }
+            if (HasOverridenGameOverScreen)
+            {
+                gameOverScreen =
+                    Instantiate(GetGameOverScreenData.Prefab.Transform(), canvasParent.MainCanvas.transform)
+                        .GetComponent<IGameOverScreen>();
+            }
+            
+            gameManager.GetComponent<APISystem>().SetGameOverScreen(gameOverScreen);
+            
+            return Task.CompletedTask;
+        }
+
+        protected override Task UnloadInternal()
+        {
+            return Task.CompletedTask;
+        }
 }
