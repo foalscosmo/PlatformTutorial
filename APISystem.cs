@@ -5,13 +5,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using com.appidea.MiniGamePlatform.CommunicationAPI;
 
-namespace com.appidea.MiniGamePlatform.Match_Color_Frogs.MiniGames.Match_The_Colors.Runtime.Scripts.Managers
-{
     public class APISystem : MonoBehaviour,IBeginDragHandler, IEndDragHandler
     {
         [SerializeField] private LevelManager levelManager;
         [SerializeField] private Slider exitSlider;
-        private MatchColorFrogsEntryPoint entryPoint;
+        private YourEntryPointClass entryPoint;
         private bool isDraggingSlider;
         
         private IGameOverScreen gameOverScreen;
@@ -61,4 +59,3 @@ namespace com.appidea.MiniGamePlatform.Match_Color_Frogs.MiniGames.Match_The_Col
             exitSlider.value = 1;
         }
     }
-}
