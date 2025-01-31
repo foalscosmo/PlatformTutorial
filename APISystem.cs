@@ -18,8 +18,8 @@ using com.appidea.MiniGamePlatform.CommunicationAPI;
 
         private void OnEnable() => levelManager.OnGameFinish += ShowGameOverScreenIfExist;
         private void OnDisable() => levelManager.OnGameFinish -= ShowGameOverScreenIfExist;
-        public void SetEntryPoint(MatchColorFrogsEntryPoint matchColorFrogsEntryPoint) =>
-            entryPoint = matchColorFrogsEntryPoint;
+        public void SetEntryPoint(YourEntryPointClass yourEntryPointClass) =>
+            entryPoint = yourEntryPointClass;
         
         public void SetGameOverScreen(IGameOverScreen screen) => gameOverScreen = screen;
         private void ShowGameOverScreenIfExist() => gameOverScreen?.ShowGameOverScreen();
