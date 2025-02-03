@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class YourGameNameEntryPoint : BaseMiniGameEntryPoint
 {
-   [SerializeField] private GameObject gamePrefab;
+        [SerializeField] private GameObject gamePrefab;
         private IGameOverScreen gameOverScreen = default;
-        
+        private GameOverScreenData GameOverData => GetGameOverScreenData;
+
         protected override Task LoadInternal()
         {
             var gameManager = Instantiate(gamePrefab);
@@ -21,6 +22,7 @@ public class YourGameNameEntryPoint : BaseMiniGameEntryPoint
                     Instantiate(GetGameOverScreenData.Prefab.Transform(), canvasParent.MainCanvas.transform)
                         .GetComponent<IGameOverScreen>();
             }
+            gameOverScreen.Init(GameOverData.CurrentMiniGame, GameOverData.RecommendedMiniGames);
             
             gameManager.GetComponent<APISystem>().SetGameOverScreen(gameOverScreen);
             
