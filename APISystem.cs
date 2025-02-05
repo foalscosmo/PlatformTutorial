@@ -21,8 +21,19 @@ using com.appidea.MiniGamePlatform.CommunicationAPI;
             entryPoint = yourEntryPointClass;
         
         public void SetGameOverScreen(IGameOverScreen screen) => gameOverScreen = screen;
-        private void ShowGameOverScreenIfExist() => gameOverScreen?.ShowGameOverScreen();
+        
+        private void ShowGameOverScreenIfExist()
+        {
+            if (gameOverScreen == null) return;
+            gameOverScreen.ShowGameOverScreen();
+            StartCoroutine(SliderLastChildTimer());
+        }
 
+        private IEnumerator SliderLastChildTimer()
+        {
+            yield return new WaitForSecondsRealtime(0.2f);
+            exitSlider.transform.SetAsLastSibling();
+        }
         private void Update()
         {
             var isInputReleased = Input.GetMouseButtonUp(0) ||
