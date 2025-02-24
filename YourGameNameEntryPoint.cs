@@ -21,8 +21,9 @@ public class YourGameNameEntryPoint : BaseMiniGameEntryPoint
                 gameOverScreen =
                     Instantiate(GetGameOverScreenData.Prefab.Transform(), canvasParent.MainCanvas.transform)
                         .GetComponent<IGameOverScreen>();
+                        
+                 gameOverScreen.Init(GameOverData.CurrentMiniGame, GameOverData.RecommendedMiniGames);
             }
-            gameOverScreen.Init(GameOverData.CurrentMiniGame, GameOverData.RecommendedMiniGames);
             
             gameManager.GetComponent<APISystem>().SetGameOverScreen(gameOverScreen);
             
