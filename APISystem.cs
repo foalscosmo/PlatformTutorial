@@ -20,13 +20,27 @@ using com.appidea.MiniGamePlatform.CommunicationAPI;
         public void SetEntryPoint(YourEntryPointClass yourEntryPointClass) =>
             entryPoint = yourEntryPointClass;
         
-        public void SetGameOverScreen(IGameOverScreen screen) => gameOverScreen = screen;
+        public void SetGameOverScreen(IGameOverScreen screen)
+		{
+			gameOverScreen = screen;
+			gameOverScreen.RunNextClicked += entryPoint.SendGameFinishedAndRunNext; 
+		}
         
+		private void OnDestroy()
+		{
+			if (gameOverScreen != null)
+				gameOverScreen.RunNextClicked -= entryPoint.SendGameFinishedAndRunNext; 
+		}
+		
         private void ShowGameOverScreenIfExist()
         {
-            if (gameOverScreen == null) return;
-            gameOverScreen.ShowGameOverScreen();
-            StartCoroutine(SliderLastChildTimer());
+            if (gameOverScreen == null)
+			{
+				entryPoint.SendGameFinished();
+				return;
+			}
+			gameOverScreen.ShowGameOverScreen();
+			StartCoroutine(SliderLastChildTimer());;
         }
 
         private IEnumerator SliderLastChildTimer()

@@ -23,10 +23,9 @@ public class YourGameNameEntryPoint : BaseMiniGameEntryPoint
                         .GetComponent<IGameOverScreen>();
                         
                  gameOverScreen.Init(GameOverData.CurrentMiniGame, GameOverData.RecommendedMiniGames);
+				 gameManager.GetComponent<APISystem>().SetGameOverScreen(gameOverScreen);
             }
-            
-            gameManager.GetComponent<APISystem>().SetGameOverScreen(gameOverScreen);
-            
+            			
             return Task.CompletedTask;
         }
 
