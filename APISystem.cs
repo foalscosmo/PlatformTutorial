@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using com.appidea.MiniGamePlatform.CommunicationAPI;
+using com.appidea.Modules.MiniGamesCommunicationAPI;
 
     public class APISystem : MonoBehaviour,IBeginDragHandler, IEndDragHandler
     {
@@ -46,7 +46,7 @@ using com.appidea.MiniGamePlatform.CommunicationAPI;
         private IEnumerator SliderLastChildTimer()
         {
             yield return new WaitForSecondsRealtime(0.2f);
-            exitSlider.transform.SetAsLastSibling();
+            exitSlider.transform.SetParent(mainCanvas.transform);
         }
         private void Update()
         {
